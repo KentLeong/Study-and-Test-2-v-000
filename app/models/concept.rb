@@ -1,3 +1,4 @@
 class Concept < ApplicationRecord
-  belongs_to :subcategories
+  belongs_to :subcategory
+  belongs_to :category
 end

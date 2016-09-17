@@ -11,7 +11,6 @@ class SubcategoriesController < ApplicationController
 
   def create
     subcategory = Subcategory.create(subcategory_params)
-    binding.pry
     if subcategory.save
       redirect_to category_path(params[:category_id]), {notice: "Successfully created subcategory"}
     else

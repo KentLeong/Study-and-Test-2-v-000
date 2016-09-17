@@ -1,0 +1,11 @@
+<%=form_for [@category, @subcategory, @concept] do |f|%>
+  <div class="field">
+    <%=f.label :name, "Concept Name:"%><br>
+    <%=f.text_field :name%>
+  </div>
+    <%=f.hidden_field :category_id, value: @category.id%>
+    <%=f.hidden_field :subcategory_id, value: @subcategory.id%>
+  <div class="submit">
+    <%=f.submit%>
+  </div>
+<%end%>

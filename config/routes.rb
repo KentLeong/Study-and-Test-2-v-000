@@ -5,11 +5,12 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
 
   resources :categories do
-    resources :subcategories
+    resources :subcategories do
+      resources :concepts
+    end
   end
 
-  resources :concepts do
-  end
+
 
   resources :tests do
   end
