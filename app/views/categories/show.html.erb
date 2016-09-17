@@ -6,7 +6,7 @@
 <ol>
   <!--Render Back/Create Links-->
   <p><%=link_to "Back", root_path%><br>
-  <%=link_to "Create New #{@category.name} Category" %></p>
+  <%=link_to "Create New #{@category.name} Subcategory", new_category_subcategory_path(@category.id) %></p>
   <%@subcategories.each do |subc|%>
     <!--Renders Subcategory-->
     <li><%=link_to subc.name, category_subcategory_path(@category, subc)%></li>

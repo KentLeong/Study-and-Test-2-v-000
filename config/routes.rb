@@ -5,9 +5,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
 
   resources :categories do
-    resources :subcategories do
-
-    end
+    resources :subcategories
   end
 
   resources :concepts do
