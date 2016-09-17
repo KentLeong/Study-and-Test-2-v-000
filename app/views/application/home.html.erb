@@ -1,0 +1,10 @@
+<center>
+  <h1>Test</h1>
+  <h3><%=link_to "Create New Category"%></h3>
+  <h3>
+  <%@categories.each do |c|%>
+    <%=link_to c.name, category_path(c)%>
+    |
+  <%end%>
+  </h3>
+</center>

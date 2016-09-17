@@ -1,0 +1,9 @@
+<h1><%=@category.name%> | <%=@subcategory.name%></h1>
+<ol>
+  <p><%=link_to "Back", category_path(@category)%></p>
+  <p><%=button_tag "Take Test"%></p>
+  <%@subcategory.concepts.each do |c|%>
+    <li><strong><%=c.name%></strong> | Questions: # | <%=link_to "Add"%> | <%=link_to "View"%> | <%=link_to "Delete"%></li>
+  <%end%>
+  <%=link_to "Add Concept"%>
+</ol>
