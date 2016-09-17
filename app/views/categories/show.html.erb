@@ -1,4 +1,7 @@
-<center><h1><%=@category.name%></h1></center>
+<center>
+  <h1><%=@category.name%></h1>
+  <%=link_to "edit", edit_category_path(@category)%>
+</center>
 
 <ol>
   <!--Render Back/Create Links-->
