@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
 
   def update
     @category.update(category_params)
-    category_action(:save, "save")
+    category_action(:save, "update")
   end
 
   def create
