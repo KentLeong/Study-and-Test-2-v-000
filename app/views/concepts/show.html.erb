@@ -3,10 +3,9 @@
   <%=link_to "Back", category_subcategory_path(@category, @subcategory)%><br>
   <%=button_tag "Take Quiz"%><br>
   <%=link_to "Add", new_category_subcategory_concept_question_path(@category, @subcategory, @concept)%>
-  <p>Questions: #</p>
-  <ul>
-    <%@concept.questions.each do |q|%>
-      <li><%=q.question_%></li>
-    <%end%>
-  </ul>
+  <p>Questions: <%=@concept.questions.count%></p>
+  <p>Difficulty: <%=@concept.get_difficulty%>/10</p>
+  <p>Description:<br>
+    <%=@concept.description%>
+  </p>
 </center>

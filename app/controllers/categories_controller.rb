@@ -30,7 +30,7 @@ class CategoriesController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     category = Category.find(params[:id])
     if category.destroy
       redirect_to root_path, {notice: "Successfully deleted category!"}
@@ -40,6 +40,7 @@ class CategoriesController < ApplicationController
   end
 
   private
+
     def category_params
       params.require(:category).permit(:name)
     end

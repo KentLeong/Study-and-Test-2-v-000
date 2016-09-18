@@ -24,6 +24,6 @@ class ConceptsController < ApplicationController
 
   private
     def concept_params
-      params.require(:concept).permit(:name, :subcategory_id, :category_id)
+      params.require(:concept).permit(:name, :subcategory_id, :category_id, :description)
     end
 end

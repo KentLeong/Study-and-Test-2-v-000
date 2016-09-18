@@ -1,6 +1,10 @@
 class User < ApplicationRecord
-  has_many :questions
   attr_accessor :login
+
+  enum role: { normal: 0, verified: 1, moderator: 2, admin: 3 }
+  enum qtype: { multiple_choice: 0, true_false: 1, word_question: 2 }
+
+  has_many :questions
 
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
   validates :username,
