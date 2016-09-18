@@ -28,9 +28,13 @@ ActiveRecord::Schema.define(version: 20160917165504) do
 
   create_table "questions", force: :cascade do |t|
     t.string   "answer"
-    t.string   "definition"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "question_"
+    t.integer  "user_id"
+    t.integer  "concept_id"
+    t.integer  "qtype"
+    t.integer  "difficulty", default: 1
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "subcategories", force: :cascade do |t|
@@ -43,11 +47,14 @@ ActiveRecord::Schema.define(version: 20160917165504) do
   create_table "tests", force: :cascade do |t|
     t.string   "name"
     t.integer  "concept_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "question_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
+    t.integer  "question_id"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

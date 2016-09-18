@@ -4,6 +4,6 @@
   <%=link_to "Add Concept", new_category_subcategory_concept_path(@category.id, @subcategory.id)%>
   <p><%=button_tag "Take Test"%></p>
   <%@subcategory.concepts.each do |c|%>
-    <li><strong><%=c.name%></strong> | Questions: # | <%=link_to "Add"%> | <%=link_to "View"%> | <%=link_to "Delete"%></li>
+    <li><strong><%=c.name%></strong> | Questions: # | <%=link_to "Add"%> | <%=link_to "View", category_subcategory_concept_path(@category.id, @subcategory.id, c.id)%> | <%=link_to "Delete"%></li>
   <%end%>
 </ol>

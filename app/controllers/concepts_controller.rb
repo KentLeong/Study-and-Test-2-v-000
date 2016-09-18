@@ -1,6 +1,8 @@
 class ConceptsController < ApplicationController
   def show
-
+    @concept = Concept.find(params[:id])
+    @subcategory = Subcategory.find(params[:subcategory_id])
+    @category = Category.find(params[:category_id])
   end
 
   def new

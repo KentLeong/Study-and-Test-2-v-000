@@ -1,0 +1,24 @@
+<%=form_for [@category, @subcategory, @concept, @question] do |f|%>
+  <div class="field">
+    <%=f.label :question_, "Question:"%>
+    <%=f.text_field :question_%>
+  </div>
+  <div class="field">
+    <%=f.label :answer, "Answer:"%>
+    <%=f.text_field :answer%>
+  </div>
+  <div class="field">
+    <%=f.label :qtype%>
+    <%=f.number_field :qtype%>
+  </div>
+  <div class="field">
+    <%=f.label :difficulty%>
+    <%=f.number_field :difficulty%>
+  </div>
+
+  <%=f.hidden_field :user_id, value: current_user.id%><br>
+  <%=f.hidden_field :concept_id, value: @concept.id%>
+  <div class="submit">
+    <%=f.submit%>
+  </div>
+<%end%>

@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :questions
   attr_accessor :login
 
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true

@@ -6,12 +6,10 @@ Rails.application.routes.draw do
 
   resources :categories do
     resources :subcategories do
-      resources :concepts
+      resources :tests
+      resources :concepts do
+        resources :questions
+      end
     end
-  end
-
-
-
-  resources :tests do
   end
 end

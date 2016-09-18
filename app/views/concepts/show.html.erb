@@ -1,0 +1,12 @@
+<center>
+  <h1><%=@concept.name%></h1>
+  <%=link_to "Back", category_subcategory_path(@category, @subcategory)%><br>
+  <%=button_tag "Take Quiz"%><br>
+  <%=link_to "Add", new_category_subcategory_concept_question_path(@category, @subcategory, @concept)%>
+  <p>Questions: #</p>
+  <ul>
+    <%@concept.questions.each do |q|%>
+      <li><%=q.question_%></li>
+    <%end%>
+  </ul>
+</center>
