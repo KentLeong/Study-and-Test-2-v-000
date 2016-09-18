@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
+  before_action :find_category, only: [:show, :edit, :update, :destroy]
   def show
-    @category = Category.find(params[:id])
     @subcategories = @category.subcategories
   end
 
@@ -9,37 +9,35 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    @category = Category.find(params[:id])
   end
 
   def update
-    category = Category.find(params[:id])
-    category.update(category_params)
-    if category.save
-      redirect_to root_path, {notice: "Successfully updated category!"}
-    else
-      redirect_to root_path, {alert: "Sorry, could not update category."}
-    end
+    @category.update(category_params)
+    category_action(:save, "save")
   end
 
   def create
-    if category = Category.create(category_params)
-      redirect_to root_path, {notice: "Successfully created category!"}
-    else
-      redirect_to root_path, {alert: "Sorry, could not create category."}
-    end
+    @category = Category.create(category_params)
+    category_action(:save, "create")
   end
 
   def destroy
-    category = Category.find(params[:id])
-    if category.destroy
-      redirect_to root_path, {notice: "Successfully deleted category!"}
-    else
-      redirect_to root_path, {alert: "Sorry, could not delete category."}
-    end
+    category_action(:destroy, "delete")
   end
 
   private
+
+    def category_action(action, type)
+      if @category.send(action)
+        redirect_to root_path, {notice: "Successfully #{type}d category!"}
+      else
+        redirect_to root_path, {alert: "Sorry, could not #{type} category."}
+      end
+    end
+
+    def find_category
+      @category = Category.find(params[:id])
+    end
 
     def category_params
       params.require(:category).permit(:name)
