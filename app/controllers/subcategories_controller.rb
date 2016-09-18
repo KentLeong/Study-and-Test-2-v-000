@@ -1,5 +1,5 @@
 class SubcategoriesController < ApplicationController
-  before_action :find_subcategory, only: [:show, :edit, :update, :destroy]
+  before_action :find_subcategory, except: [:new, :create]
   before_action :find_category, only: [:show, :new, :edit]
 
   def show

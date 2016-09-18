@@ -1,6 +1,6 @@
 class ConceptsController < ApplicationController
-  before_action :find_concept, only: [:show, :edit, :update, :destroy]
-  before_action :find_category_subcategory, only: [:show, :new, :edit, :create, :destroy]
+  before_action :find_concept, except: [:new, :create]
+  before_action :find_category_subcategory
   def show
   end
 
@@ -33,7 +33,7 @@ class ConceptsController < ApplicationController
       @concept = Concept.find(params[:id])
     end
     def concept_action(action, type)
-      if concept.send(action)
+      if @concept.send(action)
         redirect_to category_subcategory_path(@category, @subcategory), {notice: "Successfully #{type}d concept."}
       else
         redirect_to category_subcategory_path(@category, @subcategory), {alert: "Sorry, could not #{type} concept."}
