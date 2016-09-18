@@ -3,7 +3,7 @@ class SubcategoriesController < ApplicationController
     @category = Category.find(params[:category_id])
     @subcategory = Subcategory.find(params[:id])
   end
-
+  
   def new
     @category = Category.find(params[:category_id])
     @subcategory = Subcategory.new
