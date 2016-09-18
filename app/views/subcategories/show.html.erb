@@ -1,8 +1,10 @@
 <h1><%=@category.name%> | <%=@subcategory.name%></h1>
 <ol>
-  <p><%=link_to "Edit", edit_category_subcategory_path(@category, @subcategory)%></p>
   <p><%=link_to "Back", category_path(@category)%></p>
-  <%=link_to "Add Concept", new_category_subcategory_concept_path(@category.id, @subcategory.id)%>
+  <%if admin_or_mod?%>
+    <p><%=link_to "Edit", edit_category_subcategory_path(@category, @subcategory)%></p>
+    <%=link_to "Add Concept", new_category_subcategory_concept_path(@category.id, @subcategory.id)%>
+  <%end%>
   <p><%=button_tag "Take Test"%></p>
   <%@subcategory.concepts.each do |c|%>
     <li><strong><%=link_to c.name, category_subcategory_concept_path(@category.id, @subcategory.id, c.id)%></strong> | Questions: <%=c.questions.count%>

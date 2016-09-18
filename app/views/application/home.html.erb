@@ -1,6 +1,8 @@
 <center>
   <h1>Test</h1>
-  <h3><%=link_to "Create New Category", new_category_path%></h3>
+  <%if admin?%>
+    <h3><%=link_to "Create New Category", new_category_path%></h3>
+  <%end%>
   <h3>
   <%@categories.each do |c|%>
     <%=link_to c.name, category_path(c)%>
