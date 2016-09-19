@@ -28,7 +28,7 @@ class SubcategoriesController < ApplicationController
   private
 
     def find_subcategory
-      @subcategory = Subcategory.find(params[:id])
+      @subcategory = Subcategory.friendly.find(params[:id])
     end
 
     def subcategory_action(action, type)

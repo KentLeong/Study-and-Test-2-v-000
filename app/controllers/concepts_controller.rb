@@ -27,7 +27,7 @@ class ConceptsController < ApplicationController
   end
   private
     def find_concept
-      @concept = Concept.find(params[:id])
+      @concept = Concept.friendly.find(params[:id])
     end
     def concept_action(action, type)
       if @concept.send(action)

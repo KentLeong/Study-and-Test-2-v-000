@@ -1,4 +1,7 @@
 class Concept < ApplicationRecord
+  extend FriendlyId
+  friendly_id :name, use: [:slugged, :finders]
+
   belongs_to :subcategory
   has_many :questions
 
