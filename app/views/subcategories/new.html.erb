@@ -1,3 +1,5 @@
 <h1>New Subcategory</h1>
-<%=render 'form'%>
+<%=form_for [@category, @subcategory] do |f|%>
+  <%render partial: 'form', locals: {f: f}%>
+<%end%>
 <%=link_to 'Back', category_path(@category)%>

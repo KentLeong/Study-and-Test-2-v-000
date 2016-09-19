@@ -1,5 +1,7 @@
 <h1>Edit Concept</h1>
-<%=render 'form'%>
-<p><%= link_to 'Destroy', category_subcategory_concept_path(@category, @subcategory, @concept),
+<%=form_for @concept do |f|%>
+  <%render partial: 'form', locals: {f: f}%>
+<%end%>
+<p><%= link_to 'Destroy', concept_path(@concept),
             data: {confirm: 'Are you sure?'}, method: :delete %></p>
-<%=link_to "back", category_subcategory_path(@category, @subcategory)%>
+<%=link_to "back", subcategory_path(@concept.subcategory)%>

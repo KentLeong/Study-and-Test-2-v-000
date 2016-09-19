@@ -1,5 +1,7 @@
 <h1>Edit Subcategory</h1>
-<%=render 'form'%>
-<p><%= link_to 'Destroy', category_subcategory_path(@category, @subcategory),
+<%=form_for @subcategory do |f|%>
+  <%render partial: 'form', locals: {f: f}%>
+<%end%>
+<p><%= link_to 'Destroy', subcategory_path(@subcategory),
             data: {confirm: 'Are you sure?'}, method: :delete %></p>
-<p><%=link_to "Back", category_subcategory_path(@category, @subcategory)%></p>
+<p><%=link_to "Back", subcategory_path(@subcategory)%></p>

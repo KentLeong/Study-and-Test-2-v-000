@@ -1,4 +1,3 @@
-<%=form_for [@category, @subcategory, @concept, @question] do |f|%>
   <div class="field">
     <%=f.label :inquest, "Question:"%>
     <%=f.text_field :inquest%>
@@ -8,17 +7,21 @@
     <%=f.text_field :answer%>
   </div>
   <div class="field">
-    <%=f.label :qtype%>
-    <%=f.number_field :qtype%>
+    <%=f.label :qtype, "Type of Question:"%><br>
+    <%=f.radio_button :qtype, "multiple_choice"%>
+    <%=f.label :qtype, "Multiple Choice"%><br>
+    <%=f.radio_button :qtype, "true_false"%>
+    <%=f.label :qtype, "True or False"%><br>
+    <%=f.radio_button :qtype, "word_question"%>
+    <%=f.label :qtype, "Word Question"%><br>
   </div>
   <div class="field">
     <%=f.label :difficulty%>
     <%=f.number_field :difficulty%>
   </div>
 
-  <%=f.hidden_field :user_id, value: current_user.id%><br>
   <%=f.hidden_field :concept_id, value: @concept.id%>
+  <%=f.hidden_field :user_id, value: current_user.id%><br>
   <div class="submit">
     <%=f.submit%>
   </div>
-<%end%>

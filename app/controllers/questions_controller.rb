@@ -1,8 +1,8 @@
 class QuestionsController < ApplicationController
   before_action :find_question, except: [:new, :create]
-  before_action :find_category_subcategory_concept
   def new
-    @question = Question.new
+    @concept = Concept.find(params[:concept_id])
+    @question = Question.new(qtype: "multiple_choice")
   end
 
   def create
@@ -11,6 +11,7 @@ class QuestionsController < ApplicationController
   end
 
   def edit
+    @concept = @question.concept
   end
 
   def update
@@ -23,19 +24,14 @@ class QuestionsController < ApplicationController
   end
 
   private
-    def find_category_subcategory_concept
-      @category = Category.find(params[:category_id])
-      @subcategory = Subcategory.find(params[:subcategory_id])
-      @concept = Concept.find(params[:concept_id])
-    end
     def find_question
       @question = Question.find(params[:id])
     end
     def question_action(action, type)
       if @question.send(action)
-        redirect_to category_subcategory_concept_path(@category, @subcategory, @concept), {notice: "Successfully #{type}d question."}
+        redirect_to concept_path(@question.concept), {notice: "Successfully #{type}d question."}
       else
-        redirect_to category_subcategory_concept_path(@category, @subcategory, @concept), {alert: "Sorry, could not #{type} question."}
+        redirect_to concept_path(@question.concept), {alert: "Sorry, could not #{type} question."}
       end
     end
     def question_params

@@ -13,7 +13,7 @@
   <%end%>
   <%@subcategories.each do |subc|%>
     <!--Renders Subcategory-->
-    <li><%=link_to subc.name, category_subcategory_path(@category, subc)%></li>
+    <li><%=link_to subc.name, subcategory_path(subc)%></li>
     <ul>
       <!--Renders Subcategory concepts -->
       <%subc.concepts.each do |concept|%>
