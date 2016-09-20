@@ -39,9 +39,12 @@ ActiveRecord::Schema.define(version: 20160918143722) do
 
   create_table "quizzes", force: :cascade do |t|
     t.integer  "user_id"
+    t.integer  "concept_id"
     t.integer  "question_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.text     "question_ids", limit: 1333333337
+    t.text     "user_answers", limit: 1333333337
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "subcategories", force: :cascade do |t|
