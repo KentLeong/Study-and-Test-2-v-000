@@ -1,6 +1,7 @@
 class Concept < ApplicationRecord
   belongs_to :subcategory
   has_many :questions
+  has_many :quizzes
   has_many :users, through: :quizzes
   def get_difficulty
     add = 0
