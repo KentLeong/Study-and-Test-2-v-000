@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   before_action :find_question, except: [:new, :create]
   def new
     binding.pry
-    @concept = Concept.friendly.find(params[:concept_id])
+    @concept = Concept.find(params[:concept_id])
     @question = Question.new(qtype: "multiple_choice")
   end
 

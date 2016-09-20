@@ -1,6 +1,6 @@
-class CreateQuizes < ActiveRecord::Migration[5.0]
+class CreateQuizzes < ActiveRecord::Migration[5.0]
   def change
-    create_table :quizes do |t|
+    create_table :quizzes do |t|
       t.integer :user_id
       t.integer :question_id
       t.timestamps

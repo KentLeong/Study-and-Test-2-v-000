@@ -5,6 +5,7 @@ class User < ApplicationRecord
   enum qtype: { multiple_choice: 0, true_false: 1, word_question: 2 }
 
   has_many :questions
+  has_many :concepts, through: :quizzes
 
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
   validates :username,

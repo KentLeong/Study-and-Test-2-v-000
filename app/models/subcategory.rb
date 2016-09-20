@@ -1,7 +1,5 @@
 class Subcategory < ApplicationRecord
-  extend FriendlyId
-  friendly_id :name, use: [:slugged, :finders]
-
   belongs_to :category
-  has_many :concepts
+  has_many :conceptsd
+  has_many :users, through: :tests
 end
