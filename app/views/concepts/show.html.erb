@@ -1,7 +1,7 @@
 <center>
   <h1><%=@concept.name%></h1>
   <%=link_to "Back", subcategory_path(@concept.subcategory)%><br>
-  <%=button_tag "Take Quiz"%><br>
+  <%=link_to "Take Quiz", new_concept_quiz_path(@concept)%><br>
   <%if admin_or_mod?%>
     <%=link_to "Edit", edit_concept_path(@concept)%>
     <%=link_to "Add", new_concept_question_path(@concept)%>

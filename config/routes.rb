@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :subcategories do
       resources :tests
       resources :concepts do
-        resources :quizes
+        resources :quizzes
         resources :questions
       end
     end

@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'friendly_id'
 gem 'omniauth'
 gem 'omniauth-google'
 gem 'omniauth-facebook'

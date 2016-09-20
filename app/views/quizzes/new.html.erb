@@ -1,0 +1,9 @@
+<h1><%=@concept.name%></h1><br>
+<p>
+  <%=form_for [@concept, @quiz] do |f|%>
+    <%@questions.each do |q|%>
+      <%questions = q.get_three_answers%>
+      <%=f.label q.inquest%><br>
+    <%end%>
+  <%end%>
+</p>

@@ -1,4 +1,5 @@
 class Test < ApplicationRecord
   belongs_to :user
-  has_many :questions, through: :subcategory
+  belongs_to :subcategory
+  has_many :questions, through: :concepts
 end

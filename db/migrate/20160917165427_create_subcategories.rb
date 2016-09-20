@@ -3,8 +3,6 @@ class CreateSubcategories < ActiveRecord::Migration[5.0]
     create_table :subcategories do |t|
       t.string :name
       t.integer :category_id
-      t.string :slug
-      t.index :slug
       t.timestamps
     end
   end

@@ -1,10 +1,7 @@
 class Concept < ApplicationRecord
-  extend FriendlyId
-  friendly_id :name, use: [:slugged, :finders]
-
   belongs_to :subcategory
   has_many :questions
-
+  has_many :users, through: :quizzes
   def get_difficulty
     add = 0
     questions.each do |q|
