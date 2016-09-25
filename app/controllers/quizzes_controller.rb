@@ -35,6 +35,7 @@ class QuizzesController < ApplicationController
     @q_count = @question_ids.count
     @data = Hasher.recursive
 
+
     @question_ids.each do |id|
       @questions << Question.find(id)
     end
@@ -50,8 +51,12 @@ class QuizzesController < ApplicationController
         @data["incorrect"]["incorrect#{index+1}"]["q_n"] = index+1
       end
     end
+    @percent = Quiz.get_percent(@data["correct"].count, @q_count)
+    @grade = Quiz.get_letter_grade(@percent)
   end
   private
+    def grade()
+    end
     def quiz_params
       params.require(:quiz).permit(:user_id, :concept_id, :question_ids, :user_answers)
     end
