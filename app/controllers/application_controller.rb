@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   SYN_PARSE = "%~#"
-  
+
   before_action :configure_permitted_parameters, if: :devise_controller?
   protect_from_forgery with: :exception
 
@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     request.env['omniauth.origin'] || root_path
+  end
+
+  def validate_admin
+    redirect_to root_path, {alert: "You don't have access to that."} if current_user == nil || current_user.role != "admin"
   end
 
   protected

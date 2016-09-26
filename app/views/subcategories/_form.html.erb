@@ -1,3 +1,18 @@
+<% if @subcategory.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@subcategory.errors.count, "error") %>
+      prohibited this subcategory from being saved:
+    </h2>
+
+    <ul>
+    <% @subcategory.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div class="field">
   <%=f.label :name, "Subcategory Name:"%><br>
   <%=f.text_field :name%>

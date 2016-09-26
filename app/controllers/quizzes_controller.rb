@@ -1,4 +1,5 @@
 class QuizzesController < ApplicationController
+  before_action :check_signin
   def new
     @concept = Concept.find(params[:concept_id])
     @questions = @concept.questions
@@ -49,7 +50,9 @@ class QuizzesController < ApplicationController
     get_data
   end
   private
-
+    def check_signin
+      redirect_to root_path, {alert: "You need to sign in first!"} if current_user == nil
+    end
     def get_data
       @question_ids.each do |id|
         @questions << Question.find(id)

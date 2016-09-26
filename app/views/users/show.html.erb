@@ -6,7 +6,7 @@
 <%=@last_quiz.concept.subcategory.name%><br>
 <%=link_to @last_quiz.concept.name%> | <%=@last_quiz.grade%> : <%=@last_quiz.percent%>
 
-<h3>Recent quizes:</h3><br>
+<h3>Recent quizzes:</h3><br>
 <%@quizzes.each do |q|%>
   <div>
   <%=q.concept.subcategory.name%><br>

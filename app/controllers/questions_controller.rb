@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :find_question, except: [:new, :create]
+  before_action :validate_admin
   def new
     @concept = Concept.find(params[:concept_id])
     @question = Question.new()
@@ -31,7 +32,7 @@ class QuestionsController < ApplicationController
       if @question.send(action)
         redirect_to concept_path(@question.concept), {notice: "Successfully #{type}d question."}
       else
-        redirect_to concept_path(@question.concept), {alert: "Sorry, could not #{type} question."}
+        redirect_to request.referrer, {alert: "Sorry, could not #{type} question."}
       end
     end
     def question_params

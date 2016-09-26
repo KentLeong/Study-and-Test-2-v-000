@@ -3,6 +3,13 @@ class Question < ApplicationRecord
   belongs_to :concept
   belongs_to :user
 
+  validates_presence_of :inquest, :answer
+  validates :difficulty, presence: true, numericality: {
+                greater_than_or_equal_to: 0,
+                less_than_or_equal_to: 10,
+                only_integer: true
+  }
+
   enum qtype: { multiple_choice: 0, true_false: 1, word_question: 2 }
 
   #returns 1 correct answer and 3 random answers from

@@ -1,5 +1,6 @@
 class ConceptsController < ApplicationController
   before_action :find_concept, except: [:new, :create]
+  before_action :validate_admin, except: [:show]
   def show
   end
 
@@ -33,7 +34,7 @@ class ConceptsController < ApplicationController
       if @concept.send(action)
         redirect_to subcategory_path(@concept.subcategory), {notice: "Successfully #{type}d concept."}
       else
-        redirect_to subcategory_path(@concept.subcategory), {alert: "Sorry, could not #{type} concept."}
+        redirect_to request.referrer, {alert: "Sorry, could not #{type} concept."}
       end
     end
     def concept_params

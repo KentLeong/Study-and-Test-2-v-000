@@ -1,3 +1,18 @@
+  <% if @concept.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@concept.errors.count, "error") %>
+        prohibited this concept from being saved:
+      </h2>
+
+      <ul>
+      <% @concept.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="field">
     <%=f.label :name, "Concept Name:"%><br>
     <%=f.text_field :name%>

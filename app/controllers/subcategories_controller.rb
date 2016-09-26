@@ -1,5 +1,6 @@
 class SubcategoriesController < ApplicationController
   before_action :find_subcategory, except: [:new, :create]
+  before_action :validate_admin, except: [:show]
   def show
   end
 
@@ -35,7 +36,7 @@ class SubcategoriesController < ApplicationController
       if @subcategory.send(action)
         redirect_to category_path(@subcategory.category), {notice: "Successfully #{type}d subcategory"}
       else
-        redirect_to category_path(@subcategory.category), {alert: "Sorry, could not #{type} subcategory."}
+        redirect_to request.referrer, {alert: "Sorry, could not #{type} subcategory."}
       end
     end
 
