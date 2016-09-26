@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160918143722) do
+ActiveRecord::Schema.define(version: 20160926050342) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -45,6 +45,13 @@ ActiveRecord::Schema.define(version: 20160918143722) do
     t.text     "user_answers", limit: 1333333337
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+  end
+
+  create_table "random_questions", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "question_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "subcategories", force: :cascade do |t|

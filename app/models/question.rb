@@ -2,6 +2,7 @@ class Question < ApplicationRecord
 
   belongs_to :concept
   belongs_to :user
+  has_many :random_questions
 
   validates_presence_of :inquest, :answer
   validates :difficulty, presence: true, numericality: {
