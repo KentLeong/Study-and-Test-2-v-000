@@ -6,16 +6,13 @@
 </center>
 
 <ol>
-  <!--Render Back/Create Links-->
   <p><%=link_to "Back", root_path%><br>
   <%if admin_or_mod?%>
     <%=link_to "Create New #{@category.name} Subcategory", new_category_subcategory_path(@category.id) %></p>
   <%end%>
   <%@subcategories.each do |subc|%>
-    <!--Renders Subcategory-->
     <li><%=link_to subc.name, subcategory_path(subc)%></li>
     <ul>
-      <!--Renders Subcategory concepts -->
       <%subc.concepts.each do |concept|%>
         <li><%=concept.name%></li>
       <%end%>
