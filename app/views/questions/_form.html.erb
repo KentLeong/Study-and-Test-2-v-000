@@ -23,15 +23,15 @@
   </div>
   <div class="field">
     <%=label_tag :random1, "Random1:"%>
-    <%=text_field_tag "random_qs[]random1"%>
+    <%=text_field_tag("random_qs[]random1", @randos[0].name)%>
   </div>
   <div class="field">
     <%=label_tag :random2, "Random2:"%>
-    <%=text_field_tag "random_qs[]random2"%>
+    <%=text_field_tag("random_qs[]random2", @randos[1].name)%>
   </div>
   <div class="field">
     <%=label_tag :random3, "Random3:"%>
-    <%=text_field_tag "random_qs[]random3"%>
+    <%=text_field_tag("random_qs[]random3", @randos[2].name)%>
   </div>
   <div class="field">
     <%=f.label :difficulty%>
