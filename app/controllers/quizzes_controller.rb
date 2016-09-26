@@ -18,7 +18,7 @@ class QuizzesController < ApplicationController
       if @answer != nil
         @user_answers << @answer
       else
-        @user_answers << "_nil_"
+        @user_answers << "_N/A_"
       end
     end
     get_data

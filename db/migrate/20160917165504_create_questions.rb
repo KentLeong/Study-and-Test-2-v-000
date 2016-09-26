@@ -5,7 +5,6 @@ class CreateQuestions < ActiveRecord::Migration[5.0]
       t.string :inquest
       t.integer :user_id
       t.integer :concept_id
-      t.integer :qtype
       t.integer :difficulty, default: 1
       t.timestamps
     end

@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 20160918143722) do
     t.string   "inquest"
     t.integer  "user_id"
     t.integer  "concept_id"
-    t.integer  "qtype"
     t.integer  "difficulty", default: 1
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
