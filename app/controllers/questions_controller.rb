@@ -7,7 +7,17 @@ class QuestionsController < ApplicationController
   end
 
   def create
+    @randos = params[:random_qs][0]
     @question = Question.create(question_params)
+    @randos.each do |rando|
+      params[:rando] = {
+        name: rando,
+        question_id: @question.id
+      }
+      binding.pry
+      @question.random_questions << RandomQuestion.create(rando_params)
+    end
+    RandomQuestion.create()
     question_action(:save, "create")
   end
 
@@ -34,6 +44,9 @@ class QuestionsController < ApplicationController
       else
         redirect_to request.referrer, {alert: "Sorry, could not #{type} question."}
       end
+    end
+    def rando_params
+      params.require(:rando).permit(:name, :question_id)
     end
     def question_params
       params.require(:question).permit(:inquest, :answer, :concept_id, :user_id, :difficulty)
