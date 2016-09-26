@@ -16,12 +16,15 @@ class Question < ApplicationRecord
   #returns 1 correct answer and 3 random answers from
   #the same concept group as an array
   def get_answers
-    array = self.concept.questions.where("id != ?", self.id).sample(3)
-    answers = []
-    array.each do |a|
-      answers << a.answer
-    end
-    answers << self.answer
-    answers.shuffle!
+    # array = self.concept.questions.where("id != ?", self.id).sample(3)
+    # answers = []
+    # array.each do |a|
+    #   answers << a.answer
+    # end
+    # answers << self.answer
+    # answers.shuffle!
+    binding.pry
+    get_2_random_questions_from_self = self.random_questions
+
   end
 end
