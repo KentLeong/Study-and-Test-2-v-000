@@ -3,6 +3,9 @@ class Concept < ApplicationRecord
   has_many :questions
   has_many :quizzes
   has_many :users, through: :quizzes
+
+  validates_presence_of :name, :description
+
   def get_difficulty
     add = 0
     questions.each do |q|
