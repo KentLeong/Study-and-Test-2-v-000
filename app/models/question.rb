@@ -13,18 +13,19 @@ class Question < ApplicationRecord
 
   enum qtype: { multiple_choice: 0, true_false: 1, word_question: 2 }
 
-  #returns 1 correct answer and 3 random answers from
-  #the same concept group as an array
-  def get_answers
-    # array = self.concept.questions.where("id != ?", self.id).sample(3)
-    # answers = []
-    # array.each do |a|
-    #   answers << a.answer
-    # end
-    # answers << self.answer
-    # answers.shuffle!
-    binding.pry
-    get_2_random_questions_from_self = self.random_questions
 
+  def get_answers
+    answers = []
+    self.random_questions.sample(2).each do |q|
+      answers << q.name
+    end
+
+    begin
+      inquest = self.concept.questions.where("id != ?", self.id).sample(1).first.answer
+    end until !answers.include? inquest
+
+    answers += [inquest, self.answer]
+    answers.shuffle!
   end
+
 end
