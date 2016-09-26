@@ -31,7 +31,14 @@ class CategoriesController < ApplicationController
       if @category.send(action)
         redirect_to root_path, {notice: "Successfully #{type}d category!"}
       else
-        redirect_to request.referrer, {alert: "Sorry, could not #{type} category."}
+        case type
+        when "update"
+          render :edit
+        when "create"
+          render :new
+        else
+          redirect_to request.referrer, {alert: "Sorry, could not #{type} category!"}
+        end
       end
     end
 

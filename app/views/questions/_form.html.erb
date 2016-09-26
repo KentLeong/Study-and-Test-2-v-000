@@ -1,4 +1,4 @@
-<% if @question.errors.any? %>
+<% if @question.errors.any?%>
   <div id="error_explanation">
     <h2>
       <%= pluralize(@question.errors.count, "error") %>
@@ -22,6 +22,11 @@
     <%=f.text_field :answer%>
   </div>
   <div class="field">
+    <%=f.label :difficulty%>
+    <%=f.number_field :difficulty%>
+  </div>
+  <h3>Optional: </h3>
+  <div class="field">
     <%=label_tag :random1, "Random1:"%>
     <%=text_field_tag("random_qs[]random1", @randos[0].name)%>
   </div>
@@ -33,10 +38,7 @@
     <%=label_tag :random3, "Random3:"%>
     <%=text_field_tag("random_qs[]random3", @randos[2].name)%>
   </div>
-  <div class="field">
-    <%=f.label :difficulty%>
-    <%=f.number_field :difficulty%>
-  </div>
+
 
   <%=f.hidden_field :concept_id, value: @concept.id%>
   <%=f.hidden_field :user_id, value: current_user.id%><br>
