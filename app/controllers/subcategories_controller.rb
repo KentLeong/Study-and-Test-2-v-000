@@ -19,6 +19,7 @@ class SubcategoriesController < ApplicationController
   end
 
   def create
+    @category = Category.find(params[:category_id])
     @subcategory = Subcategory.create(subcategory_params)
     subcategory_action(:save, "create")
   end
@@ -34,9 +35,16 @@ class SubcategoriesController < ApplicationController
 
     def subcategory_action(action, type)
       if @subcategory.send(action)
-        redirect_to category_path(@subcategory.category), {notice: "Successfully #{type}d subcategory"}
+        redirect_to root_path, {notice: "Successfully #{type}d subcategory!"}
       else
-        redirect_to request.referrer, {alert: "Sorry, could not #{type} subcategory."}
+        case type
+        when "update"
+          render :edit
+        when "create"
+          render :new
+        else
+          redirect_to request.referrer, {alert: "Sorry, could not #{type} subcategory!"}
+        end
       end
     end
 

@@ -19,6 +19,7 @@ class ConceptsController < ApplicationController
   end
 
   def create
+    @subcategory = Subcategory.find(params[:subcategory_id])
     @concept = Concept.create(concept_params)
     concept_action(:save, "create")
   end
@@ -30,11 +31,19 @@ class ConceptsController < ApplicationController
     def find_concept
       @concept = Concept.find(params[:id])
     end
+
     def concept_action(action, type)
       if @concept.send(action)
-        redirect_to subcategory_path(@concept.subcategory), {notice: "Successfully #{type}d concept."}
+        redirect_to root_path, {notice: "Successfully #{type}d concept!"}
       else
-        redirect_to request.referrer, {alert: "Sorry, could not #{type} concept."}
+        case type
+        when "update"
+          render :edit
+        when "create"
+          render :new
+        else
+          redirect_to request.referrer, {alert: "Sorry, could not #{type} concept!"}
+        end
       end
     end
     def concept_params

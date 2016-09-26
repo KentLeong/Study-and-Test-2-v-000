@@ -4,20 +4,17 @@ class QuestionsController < ApplicationController
   def new
     @concept = Concept.find(params[:concept_id])
     @question = Question.new()
-    @randos = ["", "", ""]
+    @randos = Array.new(3) {r = RandomQuestion.new()}
   end
 
   def create
-    @randos = params[:random_qs][0]
-    if @randos.include? nil
-      redirect_to request.referrer, {alert: "You need at least 2 rando questions!"} if @randos.count < 2
-    end
-
+    @randos = Array.new(3) {r = RandomQuestion.new()}
+    @concept = Concept.find(params[:concept_id])
     @question = Question.create(question_params)
 
-    @randos.each do |rando|
+    @randos.each_with_index do |rando, index|
       params[:rando] = {
-        name: rando,
+        name: params[:random_qs][0]["random#{index}"],
         question_id: @question.id
       }
       @question.random_questions << RandomQuestion.create(rando_params)
@@ -54,9 +51,16 @@ class QuestionsController < ApplicationController
     end
     def question_action(action, type)
       if @question.send(action)
-        redirect_to concept_path(@question.concept), {notice: "Successfully #{type}d question."}
+        redirect_to root_path, {notice: "Successfully #{type}d question!"}
       else
-        redirect_to request.referrer, {alert: "Sorry, could not #{type} question."}
+        case type
+        when "update"
+          render :edit
+        when "create"
+          render :new
+        else
+          redirect_to request.referrer, {alert: "Sorry, could not #{type} question!"}
+        end
       end
     end
     def rando_params
