@@ -24,7 +24,6 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-    @concept = @question.concept
     @randos = @question.random_questions
   end
 
@@ -48,10 +47,11 @@ class QuestionsController < ApplicationController
   private
     def find_question
       @question = Question.find(params[:id])
+      @concept = @question.concept
     end
     def question_action(action, type)
       if @question.send(action)
-        redirect_to root_path, {notice: "Successfully #{type}d question!"}
+        redirect_to concept_path(@concept), {notice: "Successfully #{type}d question!"}
       else
         case type
         when "update"
