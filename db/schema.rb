@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 20160918143722) do
   create_table "quizzes", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "concept_id"
+    t.integer  "percent"
+    t.string   "grade"
     t.text     "question_ids", limit: 1333333337
     t.text     "user_answers", limit: 1333333337
     t.datetime "created_at",                      null: false

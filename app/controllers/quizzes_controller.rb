@@ -7,20 +7,30 @@ class QuizzesController < ApplicationController
 
   def create
     @user_input = params[:user_answer][0]
-    @question_id = []
-    @user_answer = []
+    @question_ids = []
+    @user_answers = []
+    @questions = []
+    @data = Hasher.recursive
+
     @user_input.count.times do |i|
       @answer = @user_input["question#{i+1}"][0][:user_answer]
-      @question_id << @user_input["question#{i+1}"][0][:question_id]
+      @question_ids << @user_input["question#{i+1}"][0][:question_id]
       if @answer != nil
-        @user_answer << @answer
+        @user_answers << @answer
       else
-        @user_answer << "_nil_"
+        @user_answers << "_nil_"
       end
     end
-    params[:quiz][:question_ids] = @question_id.join(SYN_PARSE)
-    params[:quiz][:user_answers] = @user_answer.join(SYN_PARSE)
-    q = Quiz.find_or_create_by(user_id: params[:quiz][:user_id], concept_id: params[:quiz][:concept_id])
+    get_data
+
+    @percent = Quiz.get_percent(@data["correct"].count, @questions.count)
+    @grade = Quiz.get_letter_grade(@percent)
+
+    q = Quiz.find_or_create_by(quiz_params)
+    params[:quiz][:question_ids] = @question_ids.join(SYN_PARSE)
+    params[:quiz][:user_answers] = @user_answers.join(SYN_PARSE)
+    params[:quiz][:percent] = @percent
+    params[:quiz][:grade] = @grade
     q.update(quiz_params)
     session[:result] = q
     redirect_to :results, {notice: "Here are your results!"}
@@ -31,34 +41,34 @@ class QuizzesController < ApplicationController
     @concept = Concept.find(result["concept_id"])
     @question_ids = result["question_ids"].split(SYN_PARSE)
     @user_answers = result["user_answers"].split(SYN_PARSE)
-    @questions = []
+    @percent = result["percent"]
+    @grade = result["grade"]
     @q_count = @question_ids.count
+    @questions = []
     @data = Hasher.recursive
-
-
-    @question_ids.each do |id|
-      @questions << Question.find(id)
-    end
-
-    @questions.each_with_index do |q, index|
-      if q.answer == @user_answers[index]
-        @data["correct"]["correct#{index+1}"]["q"] = q
-        @data["correct"]["correct#{index+1}"]["u_a"] = @user_answers[index]
-        @data["correct"]["correct#{index+1}"]["q_n"] = index+1
-      else
-        @data["incorrect"]["incorrect#{index+1}"]["q"] = q
-        @data["incorrect"]["incorrect#{index+1}"]["u_a"] = @user_answers[index]
-        @data["incorrect"]["incorrect#{index+1}"]["q_n"] = index+1
-      end
-    end
-    @percent = Quiz.get_percent(@data["correct"].count, @q_count)
-    @grade = Quiz.get_letter_grade(@percent)
+    get_data
   end
   private
-    def grade()
+
+    def get_data
+      @question_ids.each do |id|
+        @questions << Question.find(id)
+      end
+      @questions.each_with_index do |q, index|
+        if q.answer == @user_answers[index]
+          @data["correct"]["correct#{index+1}"]["q"] = q
+          @data["correct"]["correct#{index+1}"]["u_a"] = @user_answers[index]
+          @data["correct"]["correct#{index+1}"]["q_n"] = index+1
+        else
+          @data["incorrect"]["incorrect#{index+1}"]["q"] = q
+          @data["incorrect"]["incorrect#{index+1}"]["u_a"] = @user_answers[index]
+          @data["incorrect"]["incorrect#{index+1}"]["q_n"] = index+1
+        end
+      end
     end
+
     def quiz_params
-      params.require(:quiz).permit(:user_id, :concept_id, :question_ids, :user_answers)
+      params.require(:quiz).permit(:user_id, :concept_id, :question_ids, :user_answers, :percent, :grade)
     end
 
 end
