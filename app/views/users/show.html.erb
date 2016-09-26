@@ -2,10 +2,14 @@
 <%=@user.role%><br>
 <h2>Info:</h2>
 
-<p>Last quiz taken:</p><br>
-<%=link_to @last_quiz.concept.name%> | <%=@last_quiz%>
+<h3>Last quiz taken:</h3><br>
+<%=@last_quiz.concept.subcategory.name%><br>
+<%=link_to @last_quiz.concept.name%> | <%=@last_quiz.grade%> : <%=@last_quiz.percent%>
 
-<p>Recent quizes:</p><br>
+<h3>Recent quizes:</h3><br>
 <%@quizzes.each do |q|%>
-  <%=link_to q.concept.name%>
+  <div>
+  <%=q.concept.subcategory.name%><br>
+  <%=link_to q.concept.name%> | <%=q.grade%> : <%=q.percent%>
+  </div><br>
 <%end%>

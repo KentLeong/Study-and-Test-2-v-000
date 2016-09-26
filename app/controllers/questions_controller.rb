@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   before_action :find_question, except: [:new, :create]
   def new
     @concept = Concept.find(params[:concept_id])
-    @question = Question.new(qtype: "multiple_choice")
+    @question = Question.new()
   end
 
   def create
@@ -35,6 +35,6 @@ class QuestionsController < ApplicationController
       end
     end
     def question_params
-      params.require(:question).permit(:inquest, :answer, :qtype, :concept_id, :user_id, :difficulty)
+      params.require(:question).permit(:inquest, :answer, :concept_id, :user_id, :difficulty)
     end
 end
