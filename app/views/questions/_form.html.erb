@@ -12,36 +12,30 @@
     </ul>
   </div>
 <% end %>
+  <div class="question-form">
+    <div class="field">
+      <%=f.label :inquest, "Question:"%>
+      <%=f.text_field :inquest%>
+    </div>
+    <div class="field">
+      <%=f.label :answer, "Answer:"%>
+      <%=f.text_field :answer%>
+    </div>
+    <div class="field">
+      <%=f.label :difficulty%>
+      <%=f.number_field :difficulty%>
+    </div>
+    <h3>Optional: </h3>
+    <% @question.wrong_answers.each do |wa| %>
+      <div class="field wa-field">
+        <%=f.label :wrong_answers, "Wrong Answers:"%>
+        <%= text_field_tag "question[wrong_answers][]",  wa %>
+      </div>
+    <% end %>
 
-  <div class="field">
-    <%=f.label :inquest, "Question:"%>
-    <%=f.text_field :inquest%>
+    <%=f.hidden_field :concept_id, value: @concept.id%>
+    <%=f.hidden_field :user_id, value: current_user.id%>
   </div>
-  <div class="field">
-    <%=f.label :answer, "Answer:"%>
-    <%=f.text_field :answer%>
-  </div>
-  <div class="field">
-    <%=f.label :difficulty%>
-    <%=f.number_field :difficulty%>
-  </div>
-  <h3>Optional: </h3>
-  <div class="field">
-    <%=label_tag :random1, "Random1:"%>
-    <%=text_field_tag("random_qs[]random1", @randos[0].name)%>
-  </div>
-  <div class="field">
-    <%=label_tag :random2, "Random2:"%>
-    <%=text_field_tag("random_qs[]random2", @randos[1].name)%>
-  </div>
-  <div class="field">
-    <%=label_tag :random3, "Random3:"%>
-    <%=text_field_tag("random_qs[]random3", @randos[2].name)%>
-  </div>
-
-
-  <%=f.hidden_field :concept_id, value: @concept.id%>
-  <%=f.hidden_field :user_id, value: current_user.id%><br>
   <div class="submit">
     <%=f.submit%>
   </div>

@@ -2,4 +2,40 @@
 <%=form_for [@concept, @question] do |f|%>
   <%render partial: 'form', locals: {f: f}%>
 <%end%>
+<button id="add-wa">add wrong answer</button><br>
+<button id="remove-wa" style="display:none;">remove wrong answer</button><br>
+<p class="wa-errors"></p>
+<script>
+  $(document).ready(function() {
+    addWa();
+    removeWa()
+  })
+  function addWa() {
+    $('#add-wa').on('click', function() {
+      $('.wa-errors').text("");
+      if ($('.wa-field').length == 4) {
+        $('.wa-errors').text('You can only have up to 4 wrong answers');
+      } else {
+        $('#remove-wa').show();
+        $('.question-form').append('\
+                    <div class="field wa-field">\
+                      <label>Wrong Answers:</label>\
+                      <input type="text" name="question[wrong_answers][]" id="question_wrong_answers_"></input>\
+                    </div>\
+          ')
+        }
+      });
+  }
+
+  function removeWa() {
+    $('#remove-wa').on('click', function() {
+      $('.wa-errors').text("");
+      $('.wa-field').last().remove();
+      if ($('.wa-field').length == 0) {
+        $('#remove-wa').hide();
+      }
+    });
+  }
+</script>
+
 <%=link_to "back", concept_path(@concept)%>

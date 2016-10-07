@@ -1,4 +1,0 @@
-class RandomQuestion < ApplicationRecord
-  belongs_to :question
-  validates_presence_of :question
-end

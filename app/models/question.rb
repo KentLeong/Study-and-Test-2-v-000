@@ -3,6 +3,7 @@ class Question < ApplicationRecord
   belongs_to :concept
   belongs_to :user
   has_many :random_questions
+  serialize :wrong_answers, Array
 
   validates_presence_of :inquest, :answer
   validates :difficulty, presence: true, numericality: {
@@ -10,9 +11,11 @@ class Question < ApplicationRecord
                 less_than_or_equal_to: 10,
                 only_integer: true
   }
+  validate :unique_wrong_answers
 
-  enum qtype: { multiple_choice: 0, true_false: 1, word_question: 2 }
-
+  def unique_wrong_answers
+    errors.add(:wrong_answers, "Must have unique wrong answers") unless self.wrong_answers.uniq! == nil
+  end
 
   def get_answers
     answers = []
