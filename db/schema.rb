@@ -42,10 +42,10 @@ ActiveRecord::Schema.define(version: 20161004090545) do
     t.integer  "concept_id"
     t.integer  "percent"
     t.string   "grade"
-    t.text     "question_ids", limit: 1333333337
-    t.text     "user_answers", limit: 1333333337
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.text     "question_ids"
+    t.text     "user_answers"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "subcategories", force: :cascade do |t|

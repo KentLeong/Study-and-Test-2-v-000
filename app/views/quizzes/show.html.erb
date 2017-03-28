@@ -1,0 +1,33 @@
+<div>
+  <h1>Results</h1>
+</div>
+
+<div>
+  <h2><%= @concept.name %></h2>
+  <h4>Grade: <%= @quiz.grade %> - <%= @quiz.percent %>%</h4>
+</div>
+
+<div>
+  <h2>Correct:</h2>
+  <% @quiz.correct.each do |q| %>
+    <div>
+      <% question = Question.find(q.first[0].to_s) %>
+      <p>Question: <%= question.inquest %></p>
+      <p>Your answer: <%= q.first[1] %></p>
+      <p>-------------------------------</p>
+    </div>
+  <% end %>
+</div>
+
+<div>
+  <h2>Incorrect:</h2>
+  <% @quiz.incorrect.each do |q| %>
+    <div>
+      <% question = Question.find(q.first[0].to_s) %>
+      <p>Question: <%= question.inquest %></p>
+      <p>Your answer: <%= q.first[1] %></p>
+      <p>Correct answer: <%= question.answer %></p>
+      <p>-------------------------------</p>
+    </div>
+  <% end %>
+</div>

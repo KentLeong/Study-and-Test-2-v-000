@@ -1,19 +1,21 @@
-<h1><%=@concept.name%></h1><br>
-<p>
-  <%=form_for [@concept, @quiz] do |f|%>
-    <%=f.hidden_field :user_id, value: current_user.id%>
-    <%=f.hidden_field :concept_id, value: @concept.id%>
-    <%@questions.shuffle.each_with_index do |q, index|%>
-      <div class="field">
-        <%answers = q.get_answers%>
-        <%=label_tag "#{index+1}.) #{q.inquest}"%><br>
-        <%=hidden_field_tag "user_answer[]question#{index+1}[]question_id", q.id %>
-        <%answers.each do |a|%>
-          <%=radio_button_tag "user_answer[]question#{index+1}[]user_answer", a%>
-          <%=label_tag a%><br>
-        <%end%>
-      </div>
-    <%end%>
-    <%=f.submit("Submit Quiz")%>
+<div>
+  <h1><%=@concept.name%></h1>
+</div>
+
+<%= form_for [@concept, @quiz] do |f| %>
+  <%=f.hidden_field :user_id, value: current_user.id%>
+  <%=f.hidden_field :concept_id, value: @concept.id%>
+
+  <%@questions.shuffle.each_with_index do |question, index|%>
+    <div>
+      <%=index+1%>.) <%=question.inquest%><br>
+      <%= hidden_field_tag "answers[#{question.id}]", "Did Not Answer" %>
+      <%question.get_answers.each do |answer|%>
+        <%=radio_button_tag "answers[#{question.id}]", answer%>
+        <%=label_tag answer%><br>
+      <%end%>
+    </div>
   <%end%>
-</p>
+
+  <%= f.submit("Submit")%>
+<% end %>

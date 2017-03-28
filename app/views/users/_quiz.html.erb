@@ -1,11 +1,11 @@
 <h3>Last quiz taken:</h3><br>
 <%=@last_quiz.concept.subcategory.name%><br>
-<%=link_to @last_quiz.concept.name%> | <%=@last_quiz.grade%> : <%=@last_quiz.percent%>
+<%=link_to @last_quiz.concept.name, quiz_path(@last_quiz)%> | <%=@last_quiz.grade%> : <%=@last_quiz.percent%>
 
 <h3>Recent quizzes:</h3><br>
 <%@quizzes.each do |q|%>
   <div>
   <%=q.concept.subcategory.name%><br>
-  <%=link_to q.concept.name%> | <%=q.grade%> : <%=q.percent%>
+  <%=link_to q.concept.name, quiz_path(q)%> | <%=q.grade%> : <%=q.percent%>
   </div><br>
 <%end%>
