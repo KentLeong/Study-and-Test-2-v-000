@@ -3,6 +3,10 @@ class CategoriesController < ApplicationController
   before_action :validate_admin, except: [:show]
   def show
     @subcategories = @category.subcategories
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @category}
+    end
   end
 
   def new

@@ -1,6 +1,13 @@
 class QuestionsController < ApplicationController
   before_action :find_question, except: [:new, :create]
   before_action :validate_admin
+  def show
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @question}
+    end
+  end
+
   def new
     @concept = Concept.find(params[:concept_id])
     @question = Question.new()

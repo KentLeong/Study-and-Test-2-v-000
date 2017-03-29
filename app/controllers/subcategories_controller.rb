@@ -2,6 +2,10 @@ class SubcategoriesController < ApplicationController
   before_action :find_subcategory, except: [:new, :create]
   before_action :validate_admin, except: [:show]
   def show
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @subcategory}
+    end
   end
 
   def new
