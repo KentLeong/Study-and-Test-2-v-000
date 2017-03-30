@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'rails-assets-tether', '>= 1.1.0'
+gem 'bootstrap', '~> 4.0.0.alpha4'
 gem 'active_model_serializers'
 gem 'omniauth'
 gem 'omniauth-google'

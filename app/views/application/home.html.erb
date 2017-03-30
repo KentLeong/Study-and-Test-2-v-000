@@ -2,9 +2,34 @@
   <h1>Test</h1>
   <%if admin?%>
     <h3><%=link_to "Create New Category", new_category_path, class: "newCat"%></h3>
+    <h3 class="catForm">
+      <%=form_for @category do |f|%>
+        <% if @category.errors.any? %>
+          <div id="error_explanation">
+            <h2>
+              <%= pluralize(@category.errors.count, "error") %>
+              prohibited this category from being saved:
+            </h2>
+
+            <ul>
+            <% @category.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="field">
+          <%=f.label :name, "Category Name: "%><br>
+          <%=f.text_field :name%>
+        </div>
+
+        <div class="submit">
+          <%=f.submit%>
+        </div>
+      <%end%>
+    </h3>
   <%end%>
-  <h3 class="catForm">
-  </h3>
   <h3>
   <%@categories.each do |c|%>
     <%=link_to c.name, category_path(c)%>

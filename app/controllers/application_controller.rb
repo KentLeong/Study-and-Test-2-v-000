@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   def home
     @categories = Category.all
+    @category = Category.new
   end
 
   def after_sign_in_path_for(resource)
