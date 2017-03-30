@@ -1,8 +1,10 @@
 <center>
   <h1><%=@category.name%></h1>
   <%if admin_or_mod?%>
-    <%=link_to "edit", edit_category_path(@category)%>
+    <%=link_to "edit", edit_category_path(@category), class: "editCat"%>
   <%end%>
+  <div class="catForm">
+  </div>
 </center>
 
 <ol>

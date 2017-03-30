@@ -11,9 +11,11 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
+    render "categories/new", layout: false
   end
 
   def edit
+    render "categories/edit", layout: false
   end
 
   def update
