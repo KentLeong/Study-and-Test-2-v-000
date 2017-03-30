@@ -39,7 +39,7 @@ class SubcategoriesController < ApplicationController
 
     def subcategory_action(action, type)
       if @subcategory.send(action)
-        redirect_to root_path, {notice: "Successfully #{type}d subcategory!"}
+        redirect_to request.referrer, {notice: "Successfully #{type}d subcategory!"}
       else
         case type
         when "update"

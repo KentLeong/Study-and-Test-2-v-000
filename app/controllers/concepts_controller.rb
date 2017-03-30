@@ -38,7 +38,7 @@ class ConceptsController < ApplicationController
 
     def concept_action(action, type)
       if @concept.send(action)
-        redirect_to root_path, {notice: "Successfully #{type}d concept!"}
+        redirect_to request.referrer, {notice: "Successfully #{type}d concept!"}
       else
         case type
         when "update"

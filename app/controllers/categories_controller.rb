@@ -35,7 +35,7 @@ class CategoriesController < ApplicationController
   private
     def category_action(action, type)
       if @category.send(action)
-        redirect_to root_path, {notice: "Successfully #{type}d category!"}
+        redirect_to request.referrer, {notice: "Successfully #{type}d category!"}
       else
         case type
         when "update"
